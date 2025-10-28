@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Missão Segurança - Jogo Educativo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Tela Inicial -->
+        <div id="tela-inicial" class="tela ativa">
+            <div class="header">
+                <h1>⚠️ Missão Segurança</h1>
+                <p class="subtitulo">Aprenda sobre Segurança do Trabalho e EPIs</p>
+            </div>
+            <div class="conteudo-inicial">
+                <div class="info-box">
+                    <h2>Como Jogar</h2>
+                    <ul>
+                        <li>📝 Responda 10 perguntas sobre Segurança do Trabalho</li>
+                        <li>✅ Cada resposta correta vale 1 ponto</li>
+                        <li>💡 Aprenda com as explicações das respostas</li>
+                        <li>🏆 Descubra seu nível de conhecimento</li>
+                    </ul>
+                </div>
+                <button id="btn-iniciar" class="btn-principal">Iniciar Jogo</button>
+            </div>
+        </div>
+
+        <!-- Tela do Quiz -->
+        <div id="tela-quiz" class="tela">
+            <div class="header-quiz">
+                <div class="progresso">
+                    <span id="numero-pergunta">Pergunta 1/10</span>
+                </div>
+                <div class="pontuacao">
+                    <span id="pontos">Pontos: 0</span>
+                </div>
+            </div>
+            
+            <div class="quiz-content">
+                <h2 id="pergunta-texto" class="pergunta"></h2>
+                
+                <div id="alternativas-container" class="alternativas">
+                    <!-- Alternativas serão inseridas dinamicamente -->
+                </div>
+
+                <div id="feedback" class="feedback escondido">
+                    <p id="feedback-texto"></p>
+                    <button id="btn-proxima" class="btn-principal">Próxima Pergunta</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tela de Resultado -->
+        <div id="tela-resultado" class="tela">
+            <div class="resultado-content">
+                <h1>🎯 Resultado Final</h1>
+                
+                <div class="resultado-box">
+                    <div class="pontuacao-final">
+                        <span id="pontuacao-final">0</span>
+                        <span class="de-dez">/10</span>
+                    </div>
+                    
+                    <div id="nivel-classificacao" class="nivel"></div>
+                    
+                    <p id="mensagem-final" class="mensagem-final"></p>
+                </div>
+
+                <button id="btn-jogar-novamente" class="btn-principal">Jogar Novamente</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>Baseado no projeto acadêmico "Missão Segurança" de João Vitor Chagas da Silva</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
