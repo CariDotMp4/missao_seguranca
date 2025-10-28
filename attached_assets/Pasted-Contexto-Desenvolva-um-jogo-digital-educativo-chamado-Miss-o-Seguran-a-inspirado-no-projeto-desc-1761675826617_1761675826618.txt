@@ -1,0 +1,71 @@
+Contexto:
+Desenvolva um jogo digital educativo chamado “Missão Segurança”, inspirado no projeto descrito abaixo.
+O jogo deve rodar localmente em qualquer navegador, utilizando apenas HTML, CSS e JavaScript puro (sem frameworks externos).
+
+Objetivo do jogo:
+Promover a conscientização sobre Segurança do Trabalho, o uso correto de EPIs e a identificação de riscos ocupacionais, por meio de perguntas de múltipla escolha.
+
+Descrição geral:
+O jogador deve responder 10 perguntas aleatórias, cada uma com 4 alternativas.
+
+Cada resposta correta vale 1 ponto.
+
+Respostas incorretas mostram uma mensagem educativa explicando a alternativa correta.
+
+Ao final, o jogo mostra a pontuação total e uma classificação:
+
+0–3 acertos → “Nível Básico”
+
+4–7 acertos → “Nível Intermediário”
+
+8–10 acertos → “Nível Avançado”
+
+Requisitos técnicos:
+
+Linguagens: HTML5, CSS3 e JavaScript.
+
+Estrutura do projeto:
+
+index.html — página principal com título, botão “Iniciar Jogo” e contêiner para as perguntas.
+
+style.css — layout limpo, educativo e moderno, com cores que remetam à segurança (amarelo, preto, verde).
+
+script.js — lógica do jogo (perguntas, pontuação, mensagens e tela final).
+
+assets/ — pasta para imagens ilustrativas (ex.: capacete, cones de segurança, luvas, etc. — usar placeholders).
+
+As perguntas devem ser armazenadas em um array de objetos no script.js, no formato:
+
+{
+  pergunta: "Qual EPI é essencial para proteger a visão em operações de soldagem?",
+  alternativas: ["Capacete", "Luvas", "Óculos de proteção", "Botina"],
+  correta: 2,
+  explicacao: "Óculos de proteção evitam lesões causadas por fagulhas e luz intensa durante a soldagem."
+}
+
+
+Ao final do jogo, exibir uma mensagem como:
+“Você acertou X de 10 perguntas. Seu nível é: [classificação]. Continue se protegendo e promovendo a segurança no trabalho!”
+
+Incluir um botão “Jogar novamente”.
+
+Design sugerido:
+
+Layout centralizado, responsivo e leve.
+
+Fundo temático (pode ser um gradiente suave ou imagem sutil relacionada à segurança).
+
+Tipografia legível e ícones simples (ex.: emojis ou placeholders).
+
+Instruções de uso:
+
+O projeto deve ser totalmente rodável localmente abrindo o arquivo index.html no navegador.
+
+Incluir comentários no código explicando cada função principal.
+
+Fornecer um pequeno README.md explicando como rodar o jogo.
+
+Referência conceitual:
+Baseado no projeto acadêmico “Missão Segurança”, de João Vitor Chagas da Silva, cujo objetivo é promover o aprendizado de boas práticas de segurança do trabalho por meio de um jogo digital educativo.
+
+Gere todos os arquivos do projeto (HTML, CSS, JS e README) prontos para download e execução local.
