@@ -105,24 +105,8 @@ O jogo aborda diversos tópicos importantes de segurança do trabalho:
 
 Este é um projeto educativo de código aberto. Sugestões e melhorias são bem-vindas!
 
-### Ideias para expansão:
-
-- Adicionar mais perguntas ao banco de dados
-- Incluir categorias específicas (Elétrica, Altura, Química, etc.)
-- Implementar sistema de ranking local
-- Adicionar modo de treinamento por categoria
-- Incluir timer para desafio contra o tempo
-
 ## 📝 Licença
 
 Este projeto é de uso educacional e livre.
 
-## 👨‍🎓 Referência
-
-Baseado no projeto acadêmico **"Missão Segurança"** de **João Vitor Chagas da Silva**, cujo objetivo é promover o aprendizado de boas práticas de segurança do trabalho por meio de um jogo digital educativo.
-
----
-
 **Desenvolvido com 💛 para promover a segurança no trabalho**
-
-🔒 **Lembre-se: A segurança começa com você!**
