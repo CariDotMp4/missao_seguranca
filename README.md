@@ -11,9 +11,11 @@ Baseado no projeto acadêmico de **João Vitor Chagas da Silva**, este jogo educ
 ## ✨ Características
 
 - ✅ **10 perguntas aleatórias** por partida
-- 📚 **Banco com 20 perguntas** sobre segurança e EPIs
+- ⏱️ **Cronômetro de 20 segundos** por pergunta com contador visual
+- 📚 **Banco com 32 perguntas** sobre segurança, EPIs e Normas Regulamentadoras
 - 💡 **Feedback educativo** para cada resposta
-- 🏆 **Sistema de classificação** por níveis de conhecimento
+- 🏆 **Sistema de aprovação/reprovação** baseado no desempenho
+- 📊 **Sistema de classificação** por níveis de conhecimento
 - 📱 **Design responsivo** que funciona em qualquer dispositivo
 - 🎨 **Interface temática** com cores de segurança (amarelo, preto, verde)
 
@@ -21,12 +23,13 @@ Baseado no projeto acadêmico de **João Vitor Chagas da Silva**, este jogo educ
 
 1. Clique em **"Iniciar Jogo"**
 2. Responda as **10 perguntas** de múltipla escolha
-3. Cada resposta correta vale **1 ponto**
-4. Aprenda com as **explicações** de cada pergunta
-5. Ao final, descubra seu **nível de conhecimento**:
-   - 🔴 **Nível Básico** (0-3 acertos)
-   - 🟡 **Nível Intermediário** (4-7 acertos)
-   - 🟢 **Nível Avançado** (8-10 acertos)
+3. Você tem **20 segundos** para cada pergunta ⏱️
+4. Cada resposta correta vale **1 ponto**
+5. Aprenda com as **explicações** de cada pergunta
+6. Ao final, descubra seu **nível de conhecimento** e **situação**:
+   - 🔴 **Nível Básico** (0-3 acertos) - **REPROVADO**
+   - 🟡 **Nível Intermediário** (4-7 acertos) - **APROVADO**
+   - 🟢 **Nível Avançado** (8-10 acertos) - **APROVADO**
 
 ## 🚀 Como Executar
 
@@ -80,6 +83,14 @@ O jogo aborda diversos tópicos importantes de segurança do trabalho:
 - 📋 Normas e procedimentos de segurança
 - 🎯 CIPA e sinalização de segurança
 
+### Normas Regulamentadoras (NRs) Incluídas:
+
+- **NR-6**: Equipamentos de Proteção Individual
+- **NR-10**: Segurança em Instalações Elétricas
+- **NR-12**: Máquinas e Equipamentos
+- **NR-17**: Ergonomia
+- **NR-23**: Proteção Contra Incêndio
+
 ## 🎓 Objetivos Educacionais
 
 - Conscientizar sobre a importância dos EPIs
@@ -87,6 +98,8 @@ O jogo aborda diversos tópicos importantes de segurança do trabalho:
 - Promover boas práticas de segurança
 - Reforçar o conhecimento através de feedback educativo
 - Incentivar o aprendizado contínuo sobre segurança
+- Desenvolver agilidade na tomada de decisões sobre segurança (cronômetro)
+- Avaliar conhecimentos sobre Normas Regulamentadoras do Trabalho
 
 ## 🤝 Contribuindo
 
