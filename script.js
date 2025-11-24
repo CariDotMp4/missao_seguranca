@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // ===== BANCO DE PERGUNTAS =====
 // Array com todas as perguntas sobre Segurança do Trabalho e EPIs
 const bancoPerguntas = [
@@ -198,39 +197,9 @@ const bancoPerguntas = [
         alternativas: ["50 metros", "25 metros", "100 metros", "Não há limite"],
         correta: 1,
         explicacao: "A NR-23 estabelece que a distância máxima a percorrer para alcançar um extintor deve ser de 25 metros em áreas de maior risco."
-=======
-// Updated script.js with new timer functionality, approval system, and NR-based questions
 
-let timer;
-let isApproved = false;
-
-// Timer functionality
-function startTimer(duration) {
-    let timerDisplay = document.getElementById('timer');
-    timer = duration;
-    let minutes, seconds;
-    setInterval(function () {
-        minutes = parseInt(timer / 60, 10);
-        seconds = parseInt(timer % 60, 10);
-
-        minutes = minutes < 10 ? "0" + minutes : minutes;
-        seconds = seconds < 10 ? "0" + seconds : seconds;
-
-        timerDisplay.textContent = minutes + ":" + seconds;
-
-        if (--timer < 0) {
-            timer = duration;
-        }
-    }, 1000);
-}
-
-// Approval system
-function requestApproval() {
-    if (!isApproved) {
-        alert('Approval is required to proceed.');
->>>>>>> 441dd08dca8c6d791194e19251850c4c3c5dc767
     }
-}
+];
 
 // NR-based questions
 const questions = [
@@ -238,7 +207,6 @@ const questions = [
     { question: 'How to request NR?', options: ['Email', 'Direct Call', 'Online Form'], answer: 2 }
 ];
 
-<<<<<<< HEAD
 // ===== VARIÁVEIS GLOBAIS =====
 let perguntasSelecionadas = []; // 10 perguntas aleatórias para o jogo
 let perguntaAtual = 0; // Índice da pergunta atual
@@ -425,19 +393,12 @@ function mostrarPergunta() {
         btn.textContent = alternativa;
         btn.addEventListener('click', () => selecionarResposta(index));
         alternativasContainer.appendChild(btn);
-=======
-function loadQuestions() {
-    questions.forEach((q, index) => {
-        console.log(`Q${index + 1}: ${q.question}`);
-        // Display options and handle answers
->>>>>>> 441dd08dca8c6d791194e19251850c4c3c5dc767
     });
     
     // Inicia o cronômetro
     iniciarCronometro();
 }
 
-<<<<<<< HEAD
 /**
  * Processa a resposta selecionada pelo jogador
  */
@@ -580,8 +541,3 @@ btnJogarNovamente.addEventListener('click', jogarNovamente);
 // Mensagem no console
 console.log('🎮 Missão Segurança - Jogo carregado com sucesso!');
 console.log(`📝 Total de ${bancoPerguntas.length} perguntas disponíveis no banco de dados.`);
-=======
-// Initialize timer
-startTimer(300); // Starts a 5-minute timer
-loadQuestions();
->>>>>>> 441dd08dca8c6d791194e19251850c4c3c5dc767
