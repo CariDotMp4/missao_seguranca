@@ -1,0 +1,80 @@
+Você já possui acesso ao projeto atual do jogo “Missão Segurança”. Quero que você edite diretamente o código existente e implemente todas as melhorias descritas abaixo.
+Depois disso, gere os novos arquivos atualizados, sobrescrevendo os antigos.
+
+✔️ 1. Adicionar limite de 20 segundos por pergunta
+
+Implemente um contador regressivo de 20 segundos para cada pergunta.
+
+O cronômetro deve aparecer na tela, atualizado a cada segundo.
+
+Quando o tempo acaba:
+
+registrar como erro
+
+mostrar a explicação correta (como já acontece com erros)
+
+automaticamente carregar a próxima pergunta
+
+✔️ 2. Sistema de aprovação e reprovação
+
+O jogo já possui classificação: Básico, Intermediário e Avançado.
+
+Adicione a seguinte regra:
+
+Se o jogador terminar no Básico → REPROVADO
+
+Se terminar no Intermediário ou Avançado → APROVADO
+
+Exibir na tela final assim:
+
+“Classificação: Intermediário | Situação: APROVADO”
+
+“Classificação: Básico | Situação: REPROVADO”
+
+✔️ 3. Adicionar novas perguntas baseadas nas NRs
+
+Inclua 12 novas perguntas, seguindo o formato atual do jogo.
+Para cada pergunta, adicione um comentário indicando a NR usada.
+
+Use estas normas:
+
+NR-6 — Equipamentos de Proteção Individual
+
+NR-10 — Segurança em Instalações Elétricas
+
+NR-12 — Máquinas e Equipamentos
+
+NR-17 — Ergonomia
+
+NR-23 — Proteção Contra Incêndio
+
+Importante:
+
+mantenha as perguntas existentes;
+
+adicione as novas ao mesmo array;
+
+continue sorteando 10 perguntas aleatórias para cada partida.
+
+✔️ 4. Atualizar o projeto inteiro
+
+Modifique apenas os arquivos necessários (provavelmente script.js, index.html e, caso precise, style.css).
+
+Mantenha tudo funcionando localmente abrindo apenas o index.html.
+
+✔️ 5. Gerar a nova versão no Replit
+
+Depois de aplicar tudo:
+
+sobrescreva os arquivos existentes com as novas versões atualizadas;
+
+mostre o diff completo das modificações;
+
+garanta que o jogo esteja totalmente funcional.
+
+✔️ 6. Aqui está o PDF de referência (conteúdo conceitual do jogo):
+
+Use este PDF apenas como base de contexto sobre o tema e finalidade do jogo:
+/mnt/data/resumo_projeto_seg_trab.pdf
+
+Finalize confirmando que o projeto foi atualizado com sucesso.

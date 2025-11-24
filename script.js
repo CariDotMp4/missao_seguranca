@@ -120,6 +120,83 @@ const bancoPerguntas = [
         alternativas: ["Vitalício", "Deve ser renovado periodicamente", "Apenas na admissão", "Não precisa de treinamento"],
         correta: 1,
         explicacao: "Os treinamentos de segurança devem ser renovados periodicamente e sempre que houver mudanças nos processos ou riscos."
+    },
+    // NR-6 - Equipamentos de Proteção Individual
+    {
+        pergunta: "Segundo a NR-6, é obrigação do empregador quanto ao EPI:",
+        alternativas: ["Vender ao trabalhador", "Fornecer gratuitamente e adequado ao risco", "Apenas recomendar o uso", "Descontar do salário"],
+        correta: 1,
+        explicacao: "A NR-6 estabelece que o empregador deve fornecer gratuitamente o EPI adequado ao risco, em perfeito estado de conservação e funcionamento."
+    },
+    {
+        pergunta: "Conforme NR-6, o que o trabalhador deve fazer com o EPI danificado?",
+        alternativas: ["Usar mesmo assim", "Jogar no lixo", "Comunicar ao empregador", "Consertar por conta própria"],
+        correta: 2,
+        explicacao: "O trabalhador deve comunicar imediatamente ao empregador qualquer alteração que torne o EPI impróprio para uso."
+    },
+    // NR-10 - Segurança em Instalações Elétricas
+    {
+        pergunta: "De acordo com a NR-10, trabalhos em instalações elétricas energizadas acima de 50V devem ser realizados por:",
+        alternativas: ["Qualquer trabalhador", "Trabalhadores autorizados e capacitados", "Apenas engenheiros", "Estagiários"],
+        correta: 1,
+        explicacao: "A NR-10 exige que somente trabalhadores autorizados, qualificados e capacitados podem realizar intervenções em instalações elétricas energizadas."
+    },
+    {
+        pergunta: "Segundo a NR-10, antes de iniciar trabalhos em circuitos elétricos, deve-se:",
+        alternativas: ["Começar imediatamente", "Desenergizar e sinalizar", "Apenas usar luvas", "Trabalhar molhado"],
+        correta: 1,
+        explicacao: "A NR-10 estabelece que os circuitos devem ser desenergizados, sinalizados e aterrados antes do início dos trabalhos, sempre que tecnicamente possível."
+    },
+    // NR-12 - Máquinas e Equipamentos
+    {
+        pergunta: "A NR-12 determina que as zonas de perigo das máquinas devem possuir:",
+        alternativas: ["Apenas avisos", "Sistemas de proteção", "Pintura especial", "Nada é necessário"],
+        correta: 1,
+        explicacao: "A NR-12 exige sistemas de proteção para impedir o acesso às zonas de perigo ou que tornem seguro o acesso quando necessário."
+    },
+    {
+        pergunta: "Conforme NR-12, o botão de emergência das máquinas deve ser:",
+        alternativas: ["Verde e difícil de acessar", "Vermelho e de fácil acesso", "Amarelo e escondido", "Azul e pequeno"],
+        correta: 1,
+        explicacao: "A NR-12 estabelece que os dispositivos de parada de emergência devem ser posicionados em locais de fácil acesso e visualização, com cor vermelha."
+    },
+    // NR-17 - Ergonomia
+    {
+        pergunta: "A NR-17 estabelece que o transporte manual de cargas deve considerar:",
+        alternativas: ["Apenas a vontade do trabalhador", "As características e limitações do trabalhador", "Somente o peso da carga", "Não há restrições"],
+        correta: 1,
+        explicacao: "A NR-17 determina que o transporte manual de cargas deve considerar as características individuais e limitações do trabalhador para não comprometer sua saúde."
+    },
+    {
+        pergunta: "Segundo a NR-17, qual o peso máximo que um trabalhador pode transportar individualmente?",
+        alternativas: ["Sem limite", "60 kg", "100 kg", "40 kg"],
+        correta: 1,
+        explicacao: "A NR-17 estabelece que o peso máximo para transporte manual individual é de 60 kg, desde que respeitadas as características e condições do trabalhador."
+    },
+    // NR-23 - Proteção Contra Incêndio
+    {
+        pergunta: "A NR-23 determina que os extintores de incêndio devem ser inspecionados:",
+        alternativas: ["Apenas quando esvaziam", "Anualmente", "Periodicamente conforme normas técnicas", "Nunca"],
+        correta: 2,
+        explicacao: "A NR-23 exige inspeções periódicas dos extintores conforme as normas técnicas oficiais, garantindo sua eficácia em caso de necessidade."
+    },
+    {
+        pergunta: "Conforme NR-23, as saídas de emergência devem:",
+        alternativas: ["Ser trancadas sempre", "Permanecer desobstruídas e sinalizadas", "Ser decoradas", "Ficar escondidas"],
+        correta: 1,
+        explicacao: "A NR-23 estabelece que as saídas de emergência devem permanecer desobstruídas, sinalizadas e em perfeitas condições de uso."
+    },
+    {
+        pergunta: "Segundo a NR-23, todos os trabalhadores devem:",
+        alternativas: ["Conhecer apenas seu trabalho", "Receber treinamento sobre prevenção e combate a incêndio", "Ignorar alarmes", "Trabalhar sem instruções"],
+        correta: 1,
+        explicacao: "A NR-23 exige que todos os trabalhadores sejam treinados sobre as medidas de prevenção de incêndios e uso dos equipamentos de combate."
+    },
+    {
+        pergunta: "De acordo com a NR-23, qual a distância máxima para alcançar um extintor em áreas de risco?",
+        alternativas: ["50 metros", "25 metros", "100 metros", "Não há limite"],
+        correta: 1,
+        explicacao: "A NR-23 estabelece que a distância máxima a percorrer para alcançar um extintor deve ser de 25 metros em áreas de maior risco."
     }
 ];
 
@@ -128,6 +205,9 @@ let perguntasSelecionadas = []; // 10 perguntas aleatórias para o jogo
 let perguntaAtual = 0; // Índice da pergunta atual
 let pontuacao = 0; // Pontuação do jogador
 let respostaJaMarcada = false; // Controle para evitar múltiplos cliques
+let tempoRestante = 20; // Tempo em segundos para cada pergunta
+let intervaloCronometro = null; // Referência do intervalo do cronômetro
+let timeoutAvanco = null; // Referência do timeout de avanço automático
 
 // ===== ELEMENTOS DO DOM =====
 const telaInicial = document.getElementById('tela-inicial');
@@ -147,7 +227,9 @@ const feedbackTexto = document.getElementById('feedback-texto');
 
 const pontuacaoFinal = document.getElementById('pontuacao-final');
 const nivelClassificacao = document.getElementById('nivel-classificacao');
+const situacaoAprovacao = document.getElementById('situacao-aprovacao');
 const mensagemFinal = document.getElementById('mensagem-final');
+const tempoRestanteDisplay = document.getElementById('tempo-restante');
 
 // ===== FUNÇÕES PRINCIPAIS =====
 
@@ -184,6 +266,100 @@ function iniciarJogo() {
 }
 
 /**
+ * Inicia o cronômetro de 20 segundos
+ */
+function iniciarCronometro() {
+    tempoRestante = 20;
+    atualizarDisplayCronometro();
+    
+    // Para qualquer cronômetro anterior
+    if (intervaloCronometro) {
+        clearInterval(intervaloCronometro);
+    }
+    
+    // Reseta o estado visual do cronômetro (remove alerta crítico)
+    const cronometroElement = document.querySelector('.cronometro');
+    if (cronometroElement) {
+        cronometroElement.classList.remove('tempo-critico');
+    }
+    
+    // Inicia novo cronômetro
+    intervaloCronometro = setInterval(() => {
+        tempoRestante--;
+        atualizarDisplayCronometro();
+        
+        // Quando chega a 5 segundos, muda para cor crítica
+        if (tempoRestante <= 5) {
+            const cronometroElement = document.querySelector('.cronometro');
+            if (cronometroElement) {
+                cronometroElement.classList.add('tempo-critico');
+            }
+        }
+        
+        // Quando o tempo acaba
+        if (tempoRestante <= 0) {
+            clearInterval(intervaloCronometro);
+            intervaloCronometro = null;
+            tempoEsgotado();
+        }
+    }, 1000);
+}
+
+/**
+ * Para o cronômetro e cancela qualquer avanço automático pendente
+ */
+function pararCronometro() {
+    if (intervaloCronometro) {
+        clearInterval(intervaloCronometro);
+        intervaloCronometro = null;
+    }
+    
+    // Cancela timeout de avanço automático se existir
+    if (timeoutAvanco) {
+        clearTimeout(timeoutAvanco);
+        timeoutAvanco = null;
+    }
+    
+    // Remove classe de tempo crítico do elemento cronometro
+    const cronometroElement = document.querySelector('.cronometro');
+    if (cronometroElement) {
+        cronometroElement.classList.remove('tempo-critico');
+    }
+}
+
+/**
+ * Atualiza o display do cronômetro
+ */
+function atualizarDisplayCronometro() {
+    tempoRestanteDisplay.textContent = `⏱️ ${tempoRestante}s`;
+}
+
+/**
+ * Função chamada quando o tempo se esgota
+ */
+function tempoEsgotado() {
+    if (respostaJaMarcada) return; // Se já respondeu, não faz nada
+    respostaJaMarcada = true;
+    
+    const pergunta = perguntasSelecionadas[perguntaAtual];
+    const alternativas = document.querySelectorAll('.alternativa');
+    
+    // Desabilita todas as alternativas
+    alternativas.forEach(alt => alt.classList.add('desabilitada'));
+    
+    // Destaca a resposta correta
+    alternativas[pergunta.correta].classList.add('correta');
+    
+    // Mostra feedback de tempo esgotado
+    mostrarFeedback(false, `Tempo esgotado! ${pergunta.explicacao}`);
+    
+    // Avança automaticamente após 3 segundos
+    timeoutAvanco = setTimeout(() => {
+        proximaPergunta();
+    }, 3000);
+}
+
+/**
  * Exibe a pergunta atual na tela
  */
 function mostrarPergunta() {
@@ -211,6 +387,9 @@ function mostrarPergunta() {
         btn.addEventListener('click', () => selecionarResposta(index));
         alternativasContainer.appendChild(btn);
     });
+    
+    // Inicia o cronômetro
+    iniciarCronometro();
 }
 
 /**
@@ -219,6 +398,9 @@ function mostrarPergunta() {
 function selecionarResposta(indexSelecionado) {
     if (respostaJaMarcada) return; // Evita múltiplos cliques
     respostaJaMarcada = true;
+    
+    // Para o cronômetro
+    pararCronometro();
     
     const pergunta = perguntasSelecionadas[perguntaAtual];
     const alternativas = document.querySelectorAll('.alternativa');
@@ -270,6 +452,12 @@ function mostrarFeedback(acertou, explicacao) {
  * Avança para a próxima pergunta ou finaliza o jogo
  */
 function proximaPergunta() {
+    // Cancela qualquer timeout de avanço automático pendente
+    if (timeoutAvanco) {
+        clearTimeout(timeoutAvanco);
+        timeoutAvanco = null;
+    }
+    
     perguntaAtual++;
     
     if (perguntaAtual < perguntasSelecionadas.length) {
@@ -282,23 +470,32 @@ function proximaPergunta() {
 }
 
 /**
- * Exibe a tela de resultado final com classificação
+ * Exibe a tela de resultado final com classificação e aprovação/reprovação
  */
 function mostrarResultado() {
-    // Determina o nível baseado na pontuação
-    let nivel, classeNivel, mensagem;
+    // Para o cronômetro se ainda estiver rodando
+    pararCronometro();
+    
+    // Determina o nível e situação baseado na pontuação
+    let nivel, classeNivel, mensagem, situacao, classeSituacao;
     
     if (pontuacao <= 3) {
         nivel = "Nível Básico";
         classeNivel = "basico";
+        situacao = "REPROVADO";
+        classeSituacao = "reprovado";
         mensagem = "Continue estudando sobre segurança do trabalho! Todo conhecimento é importante para proteger você e seus colegas.";
     } else if (pontuacao <= 7) {
         nivel = "Nível Intermediário";
         classeNivel = "intermediario";
+        situacao = "APROVADO";
+        classeSituacao = "aprovado";
         mensagem = "Bom trabalho! Você tem conhecimentos importantes sobre segurança. Continue aprendendo para se tornar um expert!";
     } else {
         nivel = "Nível Avançado";
         classeNivel = "avancado";
+        situacao = "APROVADO";
+        classeSituacao = "aprovado";
         mensagem = "Excelente! Você domina os conceitos de segurança do trabalho. Parabéns pelo comprometimento com a segurança!";
     }
     
@@ -306,6 +503,8 @@ function mostrarResultado() {
     pontuacaoFinal.textContent = pontuacao;
     nivelClassificacao.textContent = nivel;
     nivelClassificacao.className = `nivel ${classeNivel}`;
+    situacaoAprovacao.textContent = situacao;
+    situacaoAprovacao.className = `situacao ${classeSituacao}`;
     mensagemFinal.textContent = `Você acertou ${pontuacao} de 10 perguntas. ${mensagem} Continue se protegendo e promovendo a segurança no trabalho!`;
     
     // Muda para tela de resultado

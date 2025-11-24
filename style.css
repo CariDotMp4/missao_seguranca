@@ -136,7 +136,7 @@ body {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-.progresso, .pontuacao {
+.progresso, .pontuacao, .cronometro {
     font-size: 1.1em;
     font-weight: bold;
     color: #333;
@@ -144,6 +144,35 @@ body {
 
 .pontuacao {
     color: #28a745;
+}
+
+.cronometro {
+    color: #ffd700;
+    font-size: 1.3em;
+    animation: pulse 1s ease-in-out infinite;
+}
+
+.cronometro.tempo-critico {
+    color: #dc3545;
+    animation: pulseRapido 0.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes pulseRapido {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
 }
 
 .quiz-content {
@@ -308,6 +337,25 @@ body {
     color: white;
 }
 
+.situacao {
+    font-size: 1.8em;
+    font-weight: bold;
+    margin: 20px 0;
+    padding: 12px 30px;
+    border-radius: 50px;
+    display: inline-block;
+}
+
+.situacao.aprovado {
+    background: #28a745;
+    color: white;
+}
+
+.situacao.reprovado {
+    background: #dc3545;
+    color: white;
+}
+
 .mensagem-final {
     font-size: 1.2em;
     color: #555;
@@ -360,6 +408,10 @@ body {
     .header-quiz {
         flex-direction: column;
         gap: 10px;
+    }
+    
+    .cronometro {
+        font-size: 1.2em;
     }
 }
 
