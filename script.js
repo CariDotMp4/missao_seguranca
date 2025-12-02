@@ -201,20 +201,64 @@ const bancoPerguntas = [
     }
 ];
 
-// NR-based questions
-const questions = [
-    { question: 'What does NR stand for?', options: ['Normal Rate', 'Non-Recurring', 'New Release'], answer: 1 },
-    { question: 'How to request NR?', options: ['Email', 'Direct Call', 'Online Form'], answer: 2 }
+// ===== MENSAGENS ENGRAÇADAS BASEADAS NO TEMPO =====
+const mensagensRapidas = [
+    "Você é um ninja da segurança! Completou em tempo recorde!",
+    "Rápido como um raio! Sua velocidade em segurança é impressionante!",
+    "Velocidade supersônica! Você voa pelos EPIs!",
+    "Tão rápido que nem deu tempo de piscar! Mestre da segurança!",
+    "Você é o Flash da segurança do trabalho!",
+    "Completou antes que eu pudesse dizer 'EPI'!",
+    "Velocidade de luz! Sua segurança é imbatível!",
+    "Rápido demais para o perigo te alcançar!",
+    "Você corre mais que um extintor em chamas!",
+    "Tempo recorde! Você é o campeão dos EPIs!",
+    "Completou tão rápido que salvou tempo para uma pausa segura!",
+    "Velocidade impressionante! Você é o herói da segurança!"
+];
+
+const mensagensMedias = [
+    "Bom ritmo! Poderia ter sido um pouco mais rápido, mas ainda assim impressionante.",
+    "Ritmo constante! Você mantém a segurança em alta velocidade.",
+    "Tempo decente! Sua paciência com a segurança é admirável.",
+    "Nem rápido, nem lento... perfeito equilíbrio na segurança!",
+    "Você vai no seu ritmo! Segurança com estilo próprio.",
+    "Tempo médio, mas conhecimento máximo!",
+    "Ritmo sustentável! Segurança que dura.",
+    "Você pensa antes de agir... sempre uma boa prática!",
+    "Tempo bom! Você reflete sobre cada resposta de segurança.",
+    "Ritmo confortável! Segurança sem pressa.",
+    "Você leva o tempo necessário... e acerta tudo!",
+    "Tempo equilibrado! Segurança em harmonia."
+];
+
+const mensagensLentas = [
+    "Ufa! Esse tempo poderia ter salvado uma vida... ou pelo menos construído uma fortaleza de EPIs!",
+    "Devagar e sempre! Pelo menos você teve tempo para pensar em cada EPI.",
+    "Tempo suficiente para montar um teatro de segurança!",
+    "Com esse tempo, você poderia ter inventado um novo EPI!",
+    "Devagar, mas com segurança... muita segurança!",
+    "Tempo de sobra! Poderia ter escrito um livro sobre EPIs.",
+    "Você teve tempo para decorar todas as NRs!",
+    "Devagar e firme! Pelo menos não houve acidentes.",
+    "Com esse ritmo, você poderia ter construído uma cidade segura!",
+    "Tempo generoso! Poderia ter treinado uma equipe inteira.",
+    "Devagar, mas acertando tudo! Segurança acima de tudo.",
+    "Ufa! Pelo menos você chegou lá... com estilo!"
 ];
 
 // ===== VARIÁVEIS GLOBAIS =====
-let perguntasSelecionadas = []; // 10 perguntas aleatórias para o jogo
+let perguntasSelecionadas = []; // Perguntas selecionadas dinamicamente
 let perguntaAtual = 0; // Índice da pergunta atual
-let pontuacao = 0; // Pontuação do jogador
+let pontuacao = 0; // Pontuação do jogador (acertos)
 let respostaJaMarcada = false; // Controle para evitar múltiplos cliques
 let tempoRestante = 20; // Tempo em segundos para cada pergunta
 let intervaloCronometro = null; // Referência do intervalo do cronômetro
 let timeoutAvanco = null; // Referência do timeout de avanço automático
+let startTime = null; // Tempo de início do quiz
+let wrongAnswers = 0; // Número de respostas erradas
+let askedIndices = new Set(); // Índices das perguntas já feitas
+let totalPerguntasRespondidas = 0; // Total de perguntas respondidas
 
 // ===== ELEMENTOS DO DOM =====
 const telaInicial = document.getElementById('tela-inicial');
@@ -254,20 +298,47 @@ function embaralharArray(array) {
 }
 
 /**
- * Inicia o jogo selecionando 10 perguntas aleatórias
+ * Seleciona uma pergunta aleatória que ainda não foi feita
+ */
+function selecionarPerguntaAleatoria() {
+    if (askedIndices.size >= bancoPerguntas.length) {
+        // Todas as perguntas foram feitas, reinicia o set
+        askedIndices.clear();
+    }
+
+    let randomIndex;
+    do {
+        randomIndex = Math.floor(Math.random() * bancoPerguntas.length);
+    } while (askedIndices.has(randomIndex));
+
+    askedIndices.add(randomIndex);
+    return bancoPerguntas[randomIndex];
+}
+
+/**
+ * Inicia o jogo selecionando perguntas dinamicamente
  */
 function iniciarJogo() {
-    // Embaralha e seleciona 10 perguntas
-    perguntasSelecionadas = embaralharArray(bancoPerguntas).slice(0, 10);
+    // Inicializa variáveis
+    perguntasSelecionadas = [];
     perguntaAtual = 0;
     pontuacao = 0;
-    
+    wrongAnswers = 0;
+    askedIndices = new Set();
+    totalPerguntasRespondidas = 0;
+    startTime = Date.now();
+
+    // Seleciona 10 perguntas únicas aleatoriamente
+    for (let i = 0; i < 10; i++) {
+        perguntasSelecionadas.push(selecionarPerguntaAleatoria());
+    }
+
     // Atualiza interface
     pontosDisplay.textContent = `Pontos: ${pontuacao}`;
-    
+
     // Muda para tela do quiz
     trocarTela(telaInicial, telaQuiz);
-    
+
     // Mostra primeira pergunta
     mostrarPergunta();
 }
@@ -347,19 +418,23 @@ function atualizarDisplayCronometro() {
 function tempoEsgotado() {
     if (respostaJaMarcada) return; // Se já respondeu, não faz nada
     respostaJaMarcada = true;
-    
+
+    // Atualiza contadores para tempo esgotado (considerado como resposta errada)
+    totalPerguntasRespondidas++;
+    wrongAnswers++;
+
     const pergunta = perguntasSelecionadas[perguntaAtual];
     const alternativas = document.querySelectorAll('.alternativa');
-    
+
     // Desabilita todas as alternativas
     alternativas.forEach(alt => alt.classList.add('desabilitada'));
-    
+
     // Destaca a resposta correta
     alternativas[pergunta.correta].classList.add('correta');
-    
+
     // Mostra feedback de tempo esgotado
     mostrarFeedback(false, `Tempo esgotado! ${pergunta.explicacao}`);
-    
+
     // Avança automaticamente após 3 segundos
     timeoutAvanco = setTimeout(() => {
         proximaPergunta();
@@ -405,33 +480,39 @@ function mostrarPergunta() {
 function selecionarResposta(indexSelecionado) {
     if (respostaJaMarcada) return; // Evita múltiplos cliques
     respostaJaMarcada = true;
-    
+
     // Para o cronômetro
     pararCronometro();
-    
+
     const pergunta = perguntasSelecionadas[perguntaAtual];
     const alternativas = document.querySelectorAll('.alternativa');
     const respostaCorreta = pergunta.correta === indexSelecionado;
-    
+
+    // Atualiza contadores
+    totalPerguntasRespondidas++;
+    if (!respostaCorreta) {
+        wrongAnswers++;
+    }
+
     // Marca a alternativa selecionada
     alternativas[indexSelecionado].classList.add('selecionada');
-    
+
     // Desabilita todas as alternativas
     alternativas.forEach(alt => alt.classList.add('desabilitada'));
-    
+
     // Aguarda um momento antes de mostrar o resultado
     setTimeout(() => {
         // Destaca a resposta correta
         alternativas[pergunta.correta].classList.add('correta');
-        
+
         // Se errou, marca a alternativa incorreta
         if (!respostaCorreta) {
             alternativas[indexSelecionado].classList.add('incorreta');
         }
-        
+
         // Mostra feedback
         mostrarFeedback(respostaCorreta, pergunta.explicacao);
-        
+
         // Atualiza pontuação se acertou
         if (respostaCorreta) {
             pontuacao++;
@@ -512,7 +593,7 @@ function mostrarResultado() {
     nivelClassificacao.className = `nivel ${classeNivel}`;
     situacaoAprovacao.textContent = situacao;
     situacaoAprovacao.className = `situacao ${classeSituacao}`;
-    mensagemFinal.textContent = `Você acertou ${pontuacao} de 10 perguntas. ${mensagem} Continue se protegendo e promovendo a segurança no trabalho!`;
+    mensagemFinal.textContent = `Você respondeu ${totalPerguntasRespondidas} perguntas, acertou ${pontuacao}, errou ${wrongAnswers}. ${mensagem} Continue se protegendo e promovendo a segurança no trabalho!`;
     
     // Muda para tela de resultado
     trocarTela(telaQuiz, telaResultado);
