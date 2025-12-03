@@ -563,7 +563,10 @@ function proximaPergunta() {
 function mostrarResultado() {
     // Para o cronômetro se ainda estiver rodando
     pararCronometro();
-    
+
+    // Log dos contadores para verificação
+    console.log(`Total perguntas respondidas: ${totalPerguntasRespondidas}, Acertos: ${pontuacao}, Erros: ${wrongAnswers}`);
+
     // Determina o nível e situação baseado na pontuação
     let nivel, classeNivel, mensagem, situacao, classeSituacao;
     
